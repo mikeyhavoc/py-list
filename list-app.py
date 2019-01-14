@@ -12,7 +12,7 @@ def welcome_prompt():
     print('1. when ready you can enter an item.')
     print('2. Anytime you need help just type "help"')
     print('3. if you want to see the list at any time Enter "listing".')
-    print('4. if you want to "delete" an item, enter "delete [item name]"')
+    print('4. if you want to "delete" an item, enter "del [item name]"')
     print('5. once done, enter "done" and we will print out your list.')
     print('Happy Listing :)')
     print('*' * 30)
@@ -24,7 +24,7 @@ def help_screen():
     print('1. when ready you can enter an item.')
     print('2. Anytime you need help just type "help"')
     print('3. if you want to see the list at any time Enter "list".')
-    print('4. if you want to "delete" an item, enter "delete [item name]"')
+    print('4. if you want to "delete" an item, enter "del [item name]"')
     print('5. once done, enter "done" and we will print out your list.')
     print('*' * 25)
 
@@ -46,8 +46,16 @@ def list_complete(items):
         print('{}# {}'.format(num + 1, item))
 
 
+def delete_item(item, items):
+    if item in items:
+        items.remove(item)
+    else:
+        print('{} not found'.format(item))
+
+
 def master():
     items = list()
+    delete = 'del'
     welcome_prompt()
     while True:
         new_item = input('add > ').lower()
@@ -55,6 +63,11 @@ def master():
             help_screen()
         elif new_item == 'list':  # LIST | serves listing so far.
             item_list(items)
+            continue
+        elif new_item.startswith('del'):
+            new_string = new_item[3:]
+            word = new_string.strip()
+            delete_item(word, items)
             continue
         elif new_item == 'done':  # COMPLETE | serves number of items and items.
             list_complete(items)
