@@ -55,7 +55,6 @@ def delete_item(item, items):
 
 def master():
     items = list()
-    delete = 'del'
     welcome_prompt()
     while True:
         new_item = input('add > ').lower()
